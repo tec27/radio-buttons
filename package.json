@@ -1,0 +1,38 @@
+{
+  "name": "radio-buttons",
+  "version": "0.0.1",
+  "description": "Server that accepts websocket connections from Google Play Music clients, allowing them to be remotely controlled.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/tec27/radio-buttons"
+  },
+  "keywords": [
+    "google",
+    "play",
+    "music",
+    "remote",
+    "control"
+  ],
+  "author": "Travis Collins <travis@tec27.com> (http://tec27.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tec27/radio-buttons/issues"
+  },
+  "homepage": "https://github.com/tec27/radio-buttons",
+  "dependencies": {
+    "express": "~3.4.7",
+    "jade": "~0.35.0",
+    "gulp": "~3.2.0",
+    "gulp-browserify": "~0.1.2",
+    "gulp-concat": "~2.1.4",
+    "gulp-uglify": "~0.1.0",
+    "gulp-ngmin": "~0.1.0",
+    "gulp-rename": "~0.2.1",
+    "socket.io": "~0.9.16"
+  }
+}

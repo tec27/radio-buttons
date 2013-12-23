@@ -1,0 +1,31 @@
+{
+  "name": "radio-buttons",
+  "main": "client/index.js",
+  "version": "0.0.1",
+  "authors": [
+    "Travis Collins <travis@tec27.com>"
+  ],
+  "description": "Server that accepts websocket connections from Google Play Music clients, allowing them to be remotely controlled.",
+  "keywords": [
+    "google",
+    "play",
+    "music",
+    "remote",
+    "control"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "client_modules",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.6",
+    "angular-route": "~1.2.6",
+    "angular-animate": "~1.2.6"
+  }
+}

@@ -1,0 +1,13 @@
+doctype 5
+html(data-ng-app='radio-buttons', lang='en')
+  head
+    meta(charset='utf-8')
+    title radio-buttons
+    link(href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400iitalic,400,300,600,700',
+      rel='stylesheet', type='text/css')
+    link(href='/styles/site.css', rel='stylesheet', type='text/css')
+    script(type='text/javascript', src='/scripts/angular.min.js')
+  body(ng-cloak)
+    block content
+    script(type='text/javascript', src='/socket.io/socket.io.js')
+    script(type='text/javascript', src='/scripts/client.js')
