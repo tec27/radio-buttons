@@ -27,6 +27,7 @@ body {
   height: 78px;
   display: inline-block;
   border: none;
+  outline: none;
   margin: 0px 1px;
   vertical-align: middle;
   text-align: center;
