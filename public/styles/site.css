@@ -35,10 +35,20 @@ body {
   padding: 10px 15px;
 }
 
+.buttons button[disabled] {
+  color: #999;
+}
+
 .buttons button:hover,
 .buttons button:active {
   background-color: #ececec;
   color: #111;
+}
+
+.buttons button[disabled]:hover,
+.buttons button[disabled]:active {
+  background-color: #ffffff;
+  color: #999;
 }
 
 .album-art {
