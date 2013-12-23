@@ -48,6 +48,7 @@ mod.factory('playerState', function(socket) {
 function PlayerStateTracker(socket) {
   this._socket = socket
   this.isPlaying = false
+  this.nowPlaying = {}
 
   socket.on('playing', function() {
     this.isPlaying = true
@@ -55,6 +56,10 @@ function PlayerStateTracker(socket) {
 
   socket.on('paused', function() {
     this.isPlaying = false
+  }.bind(this))
+
+  socket.on('nowPlaying', function(data) {
+    this.nowPlaying = data
   }.bind(this))
 }
 

@@ -37,6 +37,7 @@ var buttonState = { play: false
                   , forward: false
                   }
   , isPlaying = false
+  , nowPlayingState = {}
 
 var players = io.of('/players')
   , remotes = io.of('/remotes')
@@ -55,6 +56,9 @@ players.on('connection', function (socket) {
   }).on('playing', function(playing) {
     isPlaying = playing
     remotes.emit(playing ? 'playing' : 'paused')
+  }).on('nowPlaying', function(data) {
+    nowPlayingState = data
+    remotes.emit('nowPlaying', data)
   })
 })
 
@@ -65,6 +69,7 @@ remotes.on('connection', function(socket) {
     socket.emit('buttons/' + button + '/state', buttonState[button])
   })
   socket.emit(isPlaying ? 'playing' : 'paused')
+  socket.emit('nowPlaying', nowPlayingState)
 
   ;['play', 'pause', 'rewind', 'forward'].forEach(function(action) {
     socket.on(action, function() {

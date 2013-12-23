@@ -30,7 +30,7 @@ gulp.task('scripts', function() {
 gulp.task('default', function() {
   gulp.run('scripts')
 
-  gulp.watch(['./**/*', '!./public/**/*', '!./views/**/*'], function(event) {
+  gulp.watch(['./client/**/*'], function(event) {
     gulp.run('scripts')
   })
 })
