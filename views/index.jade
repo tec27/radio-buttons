@@ -1,18 +1,18 @@
 extends layout
 
 block content
-  .controls(data-ng-controller='PlayerCtrl')
-    .playing-state
-      span(data-ng-show='playerState.isPlaying') Playing
-      span(data-ng-hide='playerState.isPlaying') Paused
+  .player(data-ng-controller='PlayerCtrl')
     .buttons
-      button(data-ng-disabled='!buttonState.rewind', data-ng-click='rewind()') Rewind
-      button(data-ng-disabled='!buttonState.playPause', data-ng-click='playOrPause()') Play/Pause
-      button(data-ng-disabled='!buttonState.forward', data-ng-click='forward()') Forward
+      button(data-ng-disabled='!buttonState.rewind', data-ng-click='rewind()')
+        i.fa.fa-3x.fa-fast-backward
+      button(data-ng-disabled='!buttonState.playPause', data-ng-click='playOrPause()')
+        i.fa.fa-4x.fa-pause(data-ng-show='playerState.isPlaying')
+        i.fa.fa-4x.fa-play(data-ng-show='!playerState.isPlaying')
+      button(data-ng-disabled='!buttonState.forward', data-ng-click='forward()')
+        i.fa.fa-3x.fa-fast-forward
     .now-playing(data-ng-show='!!playerState.nowPlaying.title')
       img.album-art(data-ng-src='{{ playerState.nowPlaying.art }}')
       .text-wrapper
         .song-title {{ playerState.nowPlaying.title }}
-        .album-artist-wrapper
-          .song-artist {{ playerState.nowPlaying.artist }}
-          .song-album {{ playerState.nowPlaying.album }}
+        .song-album {{ playerState.nowPlaying.album }}
+        .song-artist {{ playerState.nowPlaying.artist }}
