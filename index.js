@@ -1,7 +1,8 @@
 var express = require('express')
   , path = require('path')
+  , runGulp = require('./gulp-runner')
 
-require('./gulpfile.js') // watch files for changes and rebuild client scripts
+runGulp()
 
 var app = express()
 
@@ -31,20 +32,43 @@ server.listen(3000, function() {
   console.log('Server listening on :3000')
 })
 
-io.of('/players').on('connection', function (socket) {
+var buttonState = { play: false
+                  , rewind: false
+                  , forward: false
+                  }
+  , isPlaying = false
+
+var players = io.of('/players')
+  , remotes = io.of('/remotes')
+
+players.on('connection', function (socket) {
   console.log('player connected.')
   socket.on('buttons/play/state', function(enabled) {
-    console.log('play button enabled: ' + enabled)
+    buttonState.play = enabled
+    remotes.emit('buttons/play/state', enabled)
   }).on('buttons/rewind/state', function(enabled) {
-    console.log('rewind button enabled: ' + enabled)
+    buttonState.rewind = enabled
+    remotes.emit('buttons/rewind/state', enabled)
   }).on('buttons/forward/state', function(enabled) {
-    console.log('forward button enabled: ' + enabled)
-  }).on('playing', function(isPlaying) {
-    console.log('playing: ' + isPlaying)
+    buttonState.forward = enabled
+    remotes.emit('buttons/forward/state', enabled)
+  }).on('playing', function(playing) {
+    isPlaying = playing
+    remotes.emit(playing ? 'playing' : 'paused')
   })
-  socket.emit('buttons/play')
 })
 
-io.of('/remotes').on('connection', function(socket) {
+remotes.on('connection', function(socket) {
   console.log('remote connected.')
+
+  Object.keys(buttonState).forEach(function(button) {
+    socket.emit('buttons/' + button + '/state', buttonState[button])
+  })
+  socket.emit(isPlaying ? 'playing' : 'paused')
+
+  ;['play', 'pause', 'rewind', 'forward'].forEach(function(action) {
+    socket.on(action, function() {
+      players.emit(action)
+    })
+  })
 })
